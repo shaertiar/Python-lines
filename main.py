@@ -80,15 +80,19 @@ while is_game:
         for i in range(lines_quantity):
             lines.append(random.randint(50, 950))
 
-    # Отрисовка линий
-    for i in range(len(lines)):
-        if is_show_grid:
+    # Отрисовка линий сетки
+    if is_show_grid:
+        for i in range(len(lines)):
             pg.draw.line(window, (3, 3, 50), (i*WW/len(lines), 0), (i*WW/len(lines), WH))
             pg.draw.line(window, (3, 50, 3), (0, WH - lines[i]*WH/1000), (WW, WH - lines[i]*WH/1000))
+
+            # Отрисовка позиций сетки
             if is_print_text:
                 window.blit(font.render(str(round(i*WW/len(lines), 1)), False, (6, 6, 100)), (i*WW/len(lines), 0))
                 window.blit(font.render(str(round(WH - lines[i]*WH/1000, 1)), False, (6, 100, 6)), (0, WH - lines[i]*WH/1000))
 
+    # Отрисовка линий
+    for i in range(len(lines)):
         try:
             pg.draw.line(window, (255, 0, 0), (i*WW/len(lines), WH - lines[i]*WH/1000), ((i+1)*WW/len(lines), WH - lines[i+1]*WH/1000), lines_width)
         except: 
